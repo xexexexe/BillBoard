@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.xexexexe.billboard.mongo.repo.DTransactionRepository;
 import org.xexexexe.billboard.storage.StorageProperties;
 import org.xexexexe.billboard.storage.StorageService;
 
@@ -17,11 +18,19 @@ public class BillBoardApplication {
     }
 	
 	@Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(StorageService storageService, DTransactionRepository dtransactionRepository) {
         return (args) -> {
             storageService.deleteAll();
             storageService.init();
         };
+		
+//		return new CommandLineRunner(){
+//			@Override
+//			public void run(String... args) throws Exception {
+//				storageService.deleteAll();
+//				storageService.init();
+//			}
+//		};
     }
 
 }
